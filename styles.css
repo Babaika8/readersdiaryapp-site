@@ -100,7 +100,7 @@ h3 { margin: 0; font-size: 23px; font-weight: 500; }
 .syncSection { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(36px, 7vw, 86px); padding: 30px 0 110px; }
 .syncSection p:not(.eyebrow) { color: var(--muted); font-size: 17px; }
 .visualCrop { overflow: hidden; aspect-ratio: 4 / 3; border: 1px solid var(--line); border-radius: 28px; }
-.visualCrop img { width: 100%; height: 100%; object-fit: cover; object-position: 74% center; transform: scale(1.02); }
+.visualCrop img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transform: scale(1.02); }
 .textLink { color: var(--gold); font-weight: 700; text-decoration: none; }
 .storeSection { padding: 80px 0; border-block: 1px solid var(--line); background: radial-gradient(circle at 75% 50%, rgba(126,38,52,.25), transparent 35%), var(--panel); }
 .storeSection p:not(.eyebrow) { max-width: 650px; color: var(--muted); font-size: 17px; }
@@ -187,4 +187,4 @@ footer a { color: var(--gold); text-decoration: none; font-size: 13px; }
   .pageHeroImage { border-radius: 18px; }
 }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; }
