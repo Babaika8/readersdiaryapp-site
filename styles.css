@@ -145,6 +145,18 @@ h3 { margin: 0; font-size: 23px; font-weight: 500; }
 .tariffGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
 .tariffGrid div { padding: 20px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); text-align: center; }
 .tariffGrid.featured div:first-child { border-color: var(--gold); color: var(--gold); }
+.accountForm, .promoForm { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; margin-top: 24px; align-items: end; }
+.accountForm label, .promoForm label { display: grid; gap: 7px; color: var(--muted); font-size: 13px; }
+.accountForm input, .promoForm input { min-width: 0; height: 50px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; background: var(--panel); color: var(--ink); font: inherit; }
+.accountForm .primaryButton, .promoForm .primaryButton { border: 0; cursor: pointer; }
+.paymentState { min-height: 28px; margin-top: 18px; color: var(--gold); font-size: 14px; }
+.paymentState.isError { color: #ef8996; }
+.tariffCards .tariffCard { display: grid; gap: 12px; padding: 22px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); text-align: center; }
+.tariffCard h3 { font-size: 22px; }
+.tariffCard p { margin: 0; color: var(--gold); font-weight: 750; }
+.tariffCard.featured { border-color: var(--gold); }
+.tariffCard .primaryButton { width: 100%; border: 0; cursor: pointer; font: inherit; }
+.tariffCard button:disabled { cursor: wait; opacity: .65; }
 
 footer {
   display: grid;
@@ -169,6 +181,8 @@ footer a { color: var(--gold); text-decoration: none; font-size: 13px; }
   .pageHero { min-height: auto; padding-block: 56px; }
   .pageHeroImage { order: -1; }
   .tariffGrid { grid-template-columns: repeat(2, 1fr); }
+  .accountForm, .promoForm { grid-template-columns: 1fr 1fr; }
+  .accountForm .primaryButton, .promoForm .primaryButton { grid-column: 1 / -1; }
   footer { grid-template-columns: 1fr; }
   footer > div:last-child { justify-self: start; text-align: left; }
 }
@@ -182,6 +196,7 @@ footer a { color: var(--gold); text-decoration: none; font-size: 13px; }
   .document > section { grid-template-columns: 1fr; gap: 6px; padding: 38px 0; }
   .table div { grid-template-columns: 1fr; gap: 5px; }
   .tariffGrid { grid-template-columns: 1fr; }
+  .accountForm, .promoForm { grid-template-columns: 1fr; }
   .buttonRow { align-items: stretch; flex-direction: column; }
   .pageHero { padding-inline: 20px; }
   .pageHeroImage { border-radius: 18px; }
