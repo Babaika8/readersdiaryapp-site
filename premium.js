@@ -12,6 +12,7 @@
   const accountEmail = document.querySelector("#accountEmail");
   const accountPremium = document.querySelector("#accountPremium");
   const logoutButton = document.querySelector("#logoutButton");
+  const requestedPlan = new URLSearchParams(window.location.search).get("plan") || "";
   let session = loadSession();
 
   function loadSession() { try { return JSON.parse(sessionStorage.getItem(sessionKey) || "null"); } catch (_) { return null; } }
@@ -24,6 +25,13 @@
     accountPanel.hidden = !loggedIn;
     accountEmail.textContent = loggedIn ? (session.user?.email || "Аккаунт Дневника Читателя") : "";
     if (!loggedIn) accountPremium.textContent = "";
+  }
+  function applyRequestedPlan() {
+    const target = document.querySelector(`.planButton[data-plan="${requestedPlan}"]`);
+    if (!target) return;
+    const card = target.closest(".tariffCard");
+    if (card) card.classList.add("selectedByApp");
+    if (!session?.accessToken) setState(accountState, "Выбран тариф: " + target.closest(".tariffCard").querySelector("h3").textContent + ". Войдите, чтобы продолжить оплату.");
   }
   function messageFor(code) {
     return ({ UNAUTHORIZED: "Сессия закончилась. Войдите снова.", INVALID_CREDENTIALS: "Неверная электронная почта или пароль.", EMAIL_NOT_VERIFIED: "Сначала подтвердите электронную почту в приложении.", TRIAL_ALREADY_USED: "Бесплатный период уже использован для этого аккаунта.", PROMO_INVALID: "Промокод неверный.", PROMO_ALREADY_USED: "Этот промокод уже использован для аккаунта.", PROMO_LIMIT_REACHED: "Лимит активаций промокода исчерпан.", WHEEL_PROMO_IN_APP_ONLY: "Этот промокод вводится в приложении, в разделе «Узнайте, что читать».", PAYMENTS_NOT_CONFIGURED: "Оплата временно недоступна. Попробуйте позже.", NETWORK_ERROR: "Нет связи с сервером. Попробуйте ещё раз." })[code] || "Не удалось выполнить запрос. Попробуйте ещё раз.";
@@ -70,4 +78,5 @@
   promoForm.addEventListener("submit", async event => { event.preventDefault(); if (!await requireAccount(promoState)) return; setState(promoState, "Проверяем промокод…"); try { const data = await request("/premium/redeem-promo", { method: "POST", authorized: true, body: { code: document.querySelector("#promoCode").value, source: "website" } }); promoForm.reset(); setState(promoState, data.active ? "Промокод применён. Premium активирован." : "Промокод применён."); await updateAccountState(); } catch (error) { setState(promoState, messageFor(error.message), true); } });
   renderSession();
   updateAccountState();
+  applyRequestedPlan();
 })();
