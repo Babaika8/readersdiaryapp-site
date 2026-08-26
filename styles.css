@@ -149,6 +149,11 @@ h3 { margin: 0; font-size: 23px; font-weight: 500; }
 .accountForm label, .promoForm label { display: grid; gap: 7px; color: var(--muted); font-size: 13px; }
 .accountForm input, .promoForm input { min-width: 0; height: 50px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; background: var(--panel); color: var(--ink); font: inherit; }
 .accountForm .primaryButton, .promoForm .primaryButton { border: 0; cursor: pointer; }
+.deleteAccountForm { display: grid; max-width: 680px; gap: 14px; margin-top: 24px; }
+.deleteAccountForm label { display: grid; gap: 7px; color: var(--muted); font-size: 13px; }
+.deleteAccountForm input { min-width: 0; height: 50px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; background: var(--panel); color: var(--ink); font: inherit; }
+.dangerButton { min-height: 50px; border: 0; border-radius: 999px; padding: 0 24px; background: var(--red); color: white; cursor: pointer; font: inherit; font-weight: 750; }
+.dangerButton:disabled { cursor: wait; opacity: .65; }
 .paymentState { min-height: 28px; margin-top: 18px; color: var(--gold); font-size: 14px; }
 .paymentState.isError { color: #ef8996; }
 .tariffCards .tariffCard { display: grid; gap: 12px; padding: 22px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); text-align: center; }
@@ -203,4 +208,4 @@ footer a { color: var(--gold); text-decoration: none; font-size: 13px; }
   .pageHeroImage { border-radius: 18px; }
 }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
