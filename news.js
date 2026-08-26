@@ -117,17 +117,5 @@
     }
   }
 
-  function addCommunityWidget() {
-    const box = document.querySelector(".vkNews");
-    if (!box) return;
-    const frame = document.createElement("iframe");
-    frame.title = "Последние публикации сообщества ВКонтакте";
-    frame.loading = "lazy";
-    frame.className = "vkCommunityFrame";
-    frame.src = `https://vk.com/widget_community.php?app=0&width=700px&_ver=1&gid=240924894&mode=4&color1=151015&color2=EADCE1&color3=D39A55&height=420&url=${encodeURIComponent(location.href)}`;
-    box.appendChild(frame);
-  }
-
   loadNews();
-  addCommunityWidget();
 })();
