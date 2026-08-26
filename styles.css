@@ -149,6 +149,14 @@ h3 { margin: 0; font-size: 23px; font-weight: 500; }
 .accountForm label, .promoForm label { display: grid; gap: 7px; color: var(--muted); font-size: 13px; }
 .accountForm input, .promoForm input { min-width: 0; height: 50px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; background: var(--panel); color: var(--ink); font: inherit; }
 .accountForm .primaryButton, .promoForm .primaryButton { border: 0; cursor: pointer; }
+.accountPanel { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; margin-top: 24px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 20px; background: var(--panel); }
+.accountPanel[hidden] { display: none; }
+.accountPanel > div { display: grid; min-width: 0; gap: 3px; }
+.accountPanel b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.accountPanel span:not(.accountIcon) { color: var(--muted); font-size: 13px; }
+.accountPanel span.isError { color: #ef8996; }
+.accountIcon { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid var(--gold); border-radius: 50%; background: rgba(212,170,98,.08); font-size: 23px; }
+.accountPanel .secondaryButton { border: 1px solid var(--line); color: var(--ink); cursor: pointer; font: inherit; }
 .deleteAccountForm { display: grid; max-width: 680px; gap: 14px; margin-top: 24px; }
 .deleteAccountForm label { display: grid; gap: 7px; color: var(--muted); font-size: 13px; }
 .deleteAccountForm input { min-width: 0; height: 50px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; background: var(--panel); color: var(--ink); font: inherit; }
@@ -163,6 +171,18 @@ h3 { margin: 0; font-size: 23px; font-weight: 500; }
 .tariffCard .primaryButton { width: 100%; border: 0; cursor: pointer; font: inherit; }
 .tariffCard button:disabled { cursor: wait; opacity: .65; }
 .vkNews { padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); display: grid; gap: 18px; }
+.vkCommunityFrame { width: 100%; max-width: 700px; height: 420px; border: 0; }
+.newsFeed { display: grid; gap: 22px; }
+.newsCard { overflow: hidden; display: grid; grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr); border: 1px solid var(--line); border-radius: 26px; background: var(--panel); }
+.newsCardBody, .newsArchiveBody { display: grid; align-content: start; gap: 12px; padding: 28px; }
+.newsCardBody h3, .newsArchiveBody h3 { font-size: clamp(24px, 3vw, 36px); }
+.newsCardBody p, .newsArchiveBody p { margin: 0; color: var(--muted); white-space: pre-line; }
+.newsCard time, .newsArchiveItem time { color: var(--gold); font-size: 12px; }
+.newsImage, .newsVideo { width: 100%; height: 100%; min-height: 320px; border: 0; background: #070506; object-fit: cover; }
+.newsArchive { display: grid; gap: 10px; }
+.newsArchiveItem { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); }
+.newsArchiveItem summary { padding: 18px 22px; cursor: pointer; color: var(--ink); font-family: Georgia, serif; font-size: 19px; }
+.newsArchiveItem[open] summary { border-bottom: 1px solid var(--line); color: var(--gold); }
 
 footer {
   display: grid;
@@ -184,6 +204,7 @@ footer a { color: var(--gold); text-decoration: none; font-size: 13px; }
   .homeHero img { min-height: 360px; object-fit: cover; object-position: 60% center; }
   .featureGrid { grid-template-columns: repeat(2, 1fr); }
   .syncSection, .pageHero { grid-template-columns: 1fr; }
+  .newsCard { grid-template-columns: 1fr; }
   .pageHero { min-height: auto; padding-block: 56px; }
   .pageHeroImage { order: -1; }
   .tariffGrid { grid-template-columns: repeat(2, 1fr); }
@@ -203,6 +224,8 @@ footer a { color: var(--gold); text-decoration: none; font-size: 13px; }
   .table div { grid-template-columns: 1fr; gap: 5px; }
   .tariffGrid { grid-template-columns: 1fr; }
   .accountForm, .promoForm { grid-template-columns: 1fr; }
+  .accountPanel { grid-template-columns: auto minmax(0, 1fr); }
+  .accountPanel .secondaryButton { grid-column: 1 / -1; width: 100%; }
   .buttonRow { align-items: stretch; flex-direction: column; }
   .pageHero { padding-inline: 20px; }
   .pageHeroImage { border-radius: 18px; }
