@@ -15,8 +15,17 @@
   async function request(path, body, accessToken = "") {
     const headers = { "Content-Type": "application/json" };
     if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 25000);
     let response;
-    try { response = await fetch(apiBase + path, { method: "POST", headers, body: JSON.stringify(body || {}) }); } catch (_) { throw new Error("Нет связи с сервером."); }
+    try {
+      response = await fetch(apiBase + path, { method: "POST", headers, body: JSON.stringify(body || {}), signal: controller.signal });
+    } catch (error) {
+      if (error?.name === "AbortError") throw new Error("Сервер не ответил за 25 секунд. Вернитесь в приложение и попробуйте ещё раз.");
+      throw new Error("Нет связи с сервером.");
+    } finally {
+      window.clearTimeout(timeout);
+    }
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
       const messages = {
@@ -35,7 +44,8 @@
     try {
       if (linkTicket) {
         await request("/auth/social/link-complete", { provider: providerName, token, linkTicket });
-        location.assign(`bookdiary://open/oauth?linked=${encodeURIComponent(providerName)}`);
+        setState("Google привязан. Вернитесь в приложение и снова откройте экран аккаунта.");
+        window.setTimeout(() => location.assign(`bookdiary://open/oauth?linked=${encodeURIComponent(providerName)}`), 700);
         return;
       }
       const session = await request("/auth/social", { provider: providerName, token, deviceId: "web-oauth-bridge" });
@@ -44,7 +54,8 @@
       // it after the one-time ticket has been created so no orphan refresh
       // token remains active for 90 days.
       try { await request("/auth/logout", { refreshToken: session.refreshToken }, session.accessToken); } catch (_) { /* ticket stays valid for five minutes */ }
-      location.assign(`bookdiary://open/oauth?ticket=${encodeURIComponent(result.ticket)}`);
+      setState("Вход подтверждён. Возвращаемся в приложение…");
+      window.setTimeout(() => location.assign(`bookdiary://open/oauth?ticket=${encodeURIComponent(result.ticket)}`), 700);
     } catch (error) { setState(error.message, true); }
   }
   function configureGoogle() {

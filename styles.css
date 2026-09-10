@@ -177,14 +177,18 @@ h3 { margin: 0; font-size: 23px; font-weight: 500; }
 .authDivider::before, .authDivider::after { content: ""; height: 1px; flex: 1; background: rgba(83, 65, 49, .16); }
 .googleAuthButton { min-height: 44px; }
 .vkAuthButton { width: 100%; min-height: 44px; display: flex; justify-content: center; align-items: center; gap: 10px; border: 0; border-radius: 10px; padding: 10px 16px; background: #0077ff; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+.vkAuthButton[hidden] { display: none; }
 .vkAuthButton:hover { background: #0069df; }
 .vkAuthButton:disabled { cursor: wait; opacity: .65; }
 .vkAuthMark { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #fff; color: #0077ff; font-size: 12px; font-weight: 900; }
 .socialAuthHint { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
 .appAuthPage { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
-.appAuthCard { width: min(100%, 440px); display: grid; justify-items: center; gap: 18px; padding: 34px 28px; border: 1px solid rgba(83, 65, 49, .16); border-radius: 24px; background: var(--paper); box-shadow: 0 18px 50px rgba(52, 40, 30, .12); text-align: center; }
-.appAuthCard h1, .appAuthCard p { margin: 0; }
-.appAuthCard .secondaryButton { width: 100%; text-align: center; }
+.appAuthCard { width: min(100%, 440px); display: grid; justify-items: center; gap: 18px; padding: 34px 28px; border: 1px solid rgba(83, 65, 49, .16); border-radius: 24px; background: var(--paper); box-shadow: 0 18px 50px rgba(52, 40, 30, .12); color: #332820; text-align: center; }
+.appAuthCard h1, .appAuthCard p { margin: 0; color: #332820; }
+.appAuthCard #appAuthLead { color: #6e5d50; }
+.appAuthCard .paymentState { color: #8a5a12; }
+.appAuthCard .paymentState.isError { color: #a52d3d; }
+.appAuthCard .secondaryButton { width: 100%; border-color: rgba(83, 65, 49, .24); color: #332820; text-align: center; }
 .vkNews { padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); display: grid; gap: 18px; }
 .vkCommunityFrame { width: 100%; max-width: 700px; height: 420px; border: 0; }
 .newsFeed { display: grid; gap: 22px; }
