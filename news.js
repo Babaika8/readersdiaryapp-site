@@ -50,11 +50,18 @@
       container.appendChild(text);
     }
     const link = document.createElement("a");
-    link.className = "textLink";
+    link.className = "vkCommunityButton compact";
     link.href = item.url;
     link.target = "_blank";
     link.rel = "noopener";
-    link.textContent = "Открыть во ВКонтакте →";
+    const logo = document.createElement("img");
+    logo.src = "/vk-logo.svg";
+    logo.alt = "";
+    logo.setAttribute("aria-hidden", "true");
+    link.appendChild(logo);
+    const label = document.createElement("span");
+    label.textContent = "Открыть во ВКонтакте";
+    link.appendChild(label);
     container.appendChild(link);
   }
 

@@ -44,7 +44,8 @@
     try {
       if (linkTicket) {
         await request("/auth/social/link-complete", { provider: providerName, token, linkTicket });
-        setState("Google привязан. Вернитесь в приложение и снова откройте экран аккаунта.");
+        const providerLabel = providerName === "vk" ? "VK ID" : "Google";
+        setState(`${providerLabel} привязан. Вернитесь в приложение и снова откройте экран аккаунта.`);
         window.setTimeout(() => location.assign(`bookdiary://open/oauth?linked=${encodeURIComponent(providerName)}`), 700);
         return;
       }

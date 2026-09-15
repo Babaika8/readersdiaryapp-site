@@ -117,13 +117,14 @@
   async function configureVk() {
     if (!socialConfig.vkAppId) return;
     socialAuthPanel.hidden = false;
+    vkAuthButton.hidden = false;
     const script = document.createElement("script");
     script.src = "https://unpkg.com/@vkid/sdk@2.6.1/dist-sdk/umd/index.js";
     script.onload = async () => {
       const saved = JSON.parse(sessionStorage.getItem("bookdiaryVkOauth") || "null");
       const state = saved?.state || randomBase64Url(24);
       const codeVerifier = saved?.codeVerifier || randomBase64Url(48);
-      VKID.Config.init({ app: Number(socialConfig.vkAppId), redirectUrl: socialConfig.vkRedirectUrl, state, codeVerifier, scope: "email", mode: VKID.ConfigAuthMode.Redirect });
+      VKID.Config.init({ app: Number(socialConfig.vkAppId), redirectUrl: `${location.origin}/premium.html`, state, codeVerifier, scope: "email", mode: VKID.ConfigAuthMode.Redirect });
       const query = new URLSearchParams(location.search);
       if (query.get("code") && query.get("device_id") && saved?.state === query.get("state")) {
         try { const tokens = await VKID.Auth.exchangeCode(query.get("code"), query.get("device_id"), codeVerifier); history.replaceState({}, "", location.pathname); sessionStorage.removeItem("bookdiaryVkOauth"); await finishSocial("vk", tokens.access_token); } catch (_) { setState(accountState, "VK ID не завершил вход. Попробуйте ещё раз.", true); }
